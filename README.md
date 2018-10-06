@@ -12,8 +12,8 @@ The goals / steps of this project are the following:
 
 [//]: # (Image References)
 
-[image1]: ./data/output_images/test_img_thumb.png "Thumbnails of trainning Images"
-[image2]: ./data/output_images/class_freq.png "Class frequency count"
+[image1]: ./output_images/test_img_thumb.png "Thumbnails of trainning Images"
+[image2]: ./output_images/class_freq.png "Class frequency count"
 [image3]: ./output_images/undistored_perpsective_points.jpg "Source & Destination points for perspective tranform"
 [image4]: ./output_images/lines_orig_udist.jpg "Source and Destination point verification"
 [image5]: ./output_images/warped_unwarped.jpg "Warp & Unwarped Images"
