@@ -15,10 +15,9 @@ The goals / steps of this project are the following:
 [image1]: ./output_images/test_img_thumb.png "Thumbnails of trainning Images"
 [image2]: ./output_images/class_freq.png "Class frequency count"
 [image3]: ./output_images/lenet_graph.png "Network graph"
-[image4]: ./output_images/test_signs.png.jpg "Test signs"
-[image5]: ./output_images/warped_unwarped.jpg "Warp & Unwarped Images"
-[image6]: ./output_images/lanes_detection.jpg "Lane detections"
-[video1]: ./output_video.mp4 "Video"
+[image4]: ./output_images/test_signs.png "Belgian traffic signs for testing"
+[image5]: ./output_images/classified_test_signs.png "Classified belgian signs"
+[image6]: ./output_images/classified_test_signs_french.png "Classified french signs"
 
 ## Implementation
 
@@ -52,7 +51,14 @@ In addition to that, the data set was augmented by additing rotated and shifted 
 
 ### 3 Testing the model on new images
 
-Ten images from the Belgian traffic sign set were downloaded, as they are pretty similar to the German traffic signs. These are reference images i.e. not taken The class names were taken from signnames.csv as it contains mappings from the class id (integer) to the actual sign name. The images can be seen on the figure below:
+Ten images from the Belgian traffic sign set were downloaded, as they are pretty similar to the German traffic signs. These are reference images i.e. not taken a document. The class names were read from signnames.csv as it contains mappings fom the class id (integer) to the actual sign name. The images can be seen on the figure below:
 
 ![alt text][image4]
 
+Since these were reference images the classification was perfect as can be seen from the figure below:
+
+![alt text][image5]
+
+A second set of images, taken from actual pictures was also used to test the classification accuracy when real world image are used. These traffic signs were from a French traffic sign set. Some of the signs were missclassified but that may be attributed to the fact that these signs are a bit different from the German signs. For example the 30km sign also includes text underneath.
+
+![alt text][image6]
