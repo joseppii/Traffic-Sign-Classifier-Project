@@ -35,7 +35,7 @@ A histogram of the distribution of the various samples per class is presented be
 
 ## 2 Model Architecture Design and Test
 
-The LeNet-5 implementation shown in the [classroom](https://classroom.udacity.com/nanodegrees/nd013/parts/fbf77062-5703-404e-b60c-95b78b2f3f9e/modules/6df7ae49-c61c-4bb2-a23e-6527e69209ec/lessons/601ae704-1035-4287-8b11-e2c2716217ad/concepts/d4aca031-508f-4e0b-b493-e7b706120f81) at the end of the CNN lesson was used as a starting point with minor modifications. The number of classes was changed from 10 to 43. Additional `scope` labels where added in order to utilize Tensor Board for better visualization of the network performace. In addition to that, tensor board allows for better visualization of the effects that various hyper parameter changes have on the trainned model. The graph of the implemented network can be seen in the figure below.
+The LeNet-5 implementation shown in the [classroom](https://classroom.udacity.com/nanodegrees/nd013/parts/fbf77062-5703-404e-b60c-95b78b2f3f9e/modules/6df7ae49-c61c-4bb2-a23e-6527e69209ec/lessons/601ae704-1035-4287-8b11-e2c2716217ad/concepts/d4aca031-508f-4e0b-b493-e7b706120f81) at the end of the CNN lesson was used as a starting point with minor modifications. The number of classes was changed from 10 to 43 and the grayscale input images to color. Additional `scope` labels where added in order to utilize Tensor Board for better visualization of the network performace. In addition to that, tensor board allows for better visualization of the effects that various hyper parameter changes have on the trainned model. The graph of the implemented network can be seen in the figure below.
 
 ![alt text][image3]
 
@@ -59,6 +59,10 @@ Since these were reference images the classification was perfect as can be seen 
 
 ![alt text][image5]
 
-A second set of images, taken from actual pictures was also used to test the classification accuracy when real world image are used. These traffic signs were from a French traffic sign set. Some of the signs were missclassified but that may be attributed to the fact that these signs are a bit different from the German signs. For example the 30km sign also includes text underneath.
+A second set of images, taken from actual pictures was also used to test the classification accuracy when real world image are used. These traffic signs were from a French traffic sign set. Some of the signs were missclassified but that may be attributed to the fact that these signs are a bit different from the German signs. For example the 30km sign used also includes text underneath.
 
 ![alt text][image6]
+
+Plotting the probabilities per graph, we observe that for the the correctly predicted signs we only get one probability (of significant size). For incorrectly classified images we observe that there are more than one. Classification failure may be attributed to several reasons. This can be a difference in signs used, as in the case of the 30km zone sign. In other cases when shrinking the test image, as in the cases of roadworks, it becomes similar to more than one signs, such as childen crossing.
+Finally, we calculate the real world accuracy by counting correct predictions vs total number of images. In this case the real world accuracy is calculated to be 0.875% i.e. one out of 8 images is incorrectly classified.
+
