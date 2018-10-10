@@ -66,7 +66,7 @@ A second set of images, taken from actual pictures was also used to test the cla
 ![alt text][image6]
 
 Plotting the probabilities per graph, we observe that for the the correctly predicted signs we only get one probability (of significant size). For incorrectly classified images we observe that there are more than one. Classification failure may be attributed to several reasons. This can be a difference in signs used, as in the case of the 30km zone sign. In other cases when shrinking the test image, as in the cases of roadworks, it becomes similar to more than one signs, such as childen crossing. Additionally, certain signs when photographed from a specific angle, such as the 30km and 80km look identical, especially, if the test image is shrunk.
-Finally, we calculate the real world accuracy by counting correct predictions vs total number of images. In this case the real world accuracy is calculated to be 0.875% i.e. one out of 8 images is incorrectly classified.
+Finally, we calculate the real world accuracy by counting correct predictions vs total number of images. In this case the real world accuracy is calculated to be 0.875% i.e. one out of 8 images is incorrectly classified. The html file for this notebook can be found in the root folder.
 
 ### 4 Discussion
 
