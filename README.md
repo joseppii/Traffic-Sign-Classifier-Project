@@ -65,7 +65,17 @@ A second set of images, taken from actual pictures was also used to test the cla
 
 ![alt text][image6]
 
-Plotting the probabilities per graph, we observe that for the the correctly predicted signs we only get one probability (of significant size). For incorrectly classified images we observe that there are more than one. Classification failure may be attributed to several reasons. This can be a difference in signs used, as in the case of the 30km zone sign. In other cases when shrinking the test image, as in the cases of roadworks, it becomes similar to more than one signs, such as childen crossing. Additionally, certain signs when photographed from a specific angle, such as the 30km and 80km look identical, especially, if the test image is shrunk.
+Plotting the probabilities per graph, we observe that for the the correctly predicted signs we only get one probability (of significant size). For incorrectly classified images we observe that there are more than one. Classification failure may be attributed to several reasons. 
+
+* This can be a difference in signs used, as in the case of the 30km zone sign. 
+* In other cases when excessive shrinking is applied to the test image, as in the cases of the roadworks sign used, it becomes similar to more than one signs, such as childen crossing.
+* Sometimes, shrinking images that are normally not square, into a 32x32 square image, changes their aspect ratio, distorting them significantly. For example the 30km sign used for trainning is square. But the 30km sign used for testing is not, as it contains the zone keyword. 
+* Signs when photographed from an angle, such as the 30km, 60km and 80km look identical, especially, if the test image is shrunk significantly. 
+* Tilt angle, also effects classification significantly, as it makes certain details look less prominent. For example the roadworks sign, when titled to the right results in the human being more pronounced while the details to the right dissappear, making the sign look like a dangerous curve to the left sign. Number sign are particularly effected when photographed with large tilt angles
+* Contrast is normally a huge issue, but in our case we chose a pre-processing technique (adaptive histogram equalization) that reduces this effect
+* Background objects can also play a significant role, especially if they contain other traffic signs. 
+* Jiter also makes certain details look less prominent, particularly for signs that have a lot of detail i.e. childern crossing classified as road norrows to the left/right sign.
+
 Finally, we calculate the real world accuracy by counting correct predictions vs total number of images. In this case the real world accuracy is calculated to be 0.875% i.e. one out of 8 images is incorrectly classified. The html file for this notebook can be found in the root folder.
 
 ### 4 Discussion
