@@ -18,6 +18,7 @@ The goals / steps of this project are the following:
 [image4]: ./output_images/test_signs.png "Belgian traffic signs for testing"
 [image5]: ./output_images/classified_test_signs.png "Classified belgian signs"
 [image6]: ./output_images/classified_test_signs_french.png "Classified french signs"
+[image7]: ./output_images/accuracy.png "Accuracy plot"
 
 ## Implementation
 
@@ -42,9 +43,17 @@ The LeNet-5 implementation shown in the [classroom](https://classroom.udacity.co
 If the jupyter notebook is executed, an interactive graph can be obtained by typing `tensorboard --logdir=/tmp/udacity/graphs/traffic-sign-classifier-{timestamp}, pasting the resulting url on a browser. 
 
 The initial validation accuracy, of the LeNet-5 model was approximatelly 0.89, using the original dataset. Augmenting and normalizing the data increased the validation accuracy to 0.93.
-The optimizer was also changed from SGD to Adam and various learning rates were tested. The optimal rate was found to be 0.0015 (three rates were tested: 0.0015 0.0020 0.0025). With the Adam optimizer and this rate we were able to achieve an accuracy of 0.912 on the validation data and 0.949 on the test data. Higher learning rates converged faster but the validation accuracy was lower. I also tried exponential learning decay (code is commented out on the jupyter notebook) but the result was marginally worse and therefore it was not used.
-I also tried L2 regularization (before modifying the code to support tensor board) but this did not improve accuracy either (code is commented out on the jupyter notebook).
-Batch size was set to 128. 256 was also tested but the resulting accuracy was unaffected. The model trainned for 15 epochs, but 10 should be enough, as this seems to be the limit where overfitting is observed.
+The optimizer was also changed from SGD to Adam and various combinations of hyper parameters were tested:
+
+* learning rates 0.0010, 0.0015, 0.0020
+* batch sizes 32, 64, 128 ,256
+* epochs 10, 15,20, 25, 30
+* dropout keep probability 0.5, 0,6, 0,75, 0.8
+
+In addition to that, learning rate decay was also tested but later removed (commented out) as it gave worse results than expected. L2 regularization was also tested, using a penalty factor of 5e-4, but that also did not improve performance and was subsequently removed. As the difference between trainning and validation accuracy was quite big, dropout layers were added to the original lenet model, to reduce overfitting. Initially, a dropout layer was added after each convolutional and fully connected layer, but this reduced all accuracies. Imprevement was noticed when dropout layers were added only after the fully connected layers. Various keep probabilities were tested, in conjunction with different batch sizes, epochs and a smaller learning rate. It was found that smaller batch sizes performed better, especially after the addition of dropout layers to the model.
+The best results were obtained for a learning rate of 0.0010, batch size 64, keep probability of 0.75 trainning for 15 epochs. The test accuracy achieved was 0.961. A plot of the trainning and validation accuracy (per epoch) can be seen in the figure below:
+
+![alt text][image7]
 
 ### 2.1 Data pre-processing
 
@@ -65,15 +74,15 @@ A second set of images, taken from actual pictures was also used to test the cla
 
 ![alt text][image6]
 
-Plotting the probabilities per graph, we observe that for the the correctly predicted signs we only get one probability (of significant size). For incorrectly classified images we observe that there are more than one. Classification failure may be attributed to several reasons. 
+Plotting the probabilities per graph, we observe that for the the correctly predicted signs we only get one probability (of significant size). For incorrectly classified images we observe that there are more than one. Classification failure may be attributed to several reasons.
 
-* This can be a difference in signs used, as in the case of the 30km zone sign. 
+* This can be a difference in signs used, as in the case of the 30km zone sign.
 * In other cases when excessive shrinking is applied to the test image, as in the cases of the roadworks sign used, it becomes similar to more than one signs, such as childen crossing.
-* Sometimes, shrinking images that are normally not square, into a 32x32 square image, changes their aspect ratio, distorting them significantly. For example the 30km sign used for trainning is square. But the 30km sign used for testing is not, as it contains the zone keyword. 
-* Signs when photographed from an angle, such as the 30km, 60km and 80km look identical, especially, if the test image is shrunk significantly. 
+* Sometimes, shrinking images that are normally not square, into a 32x32 square image, changes their aspect ratio, distorting them significantly. For example the 30km sign used for trainning is square. But the 30km sign used for testing is not, as it contains the zone keyword.
+* Signs when photographed from an angle, such as the 30km, 60km and 80km look identical, especially, if the test image is shrunk significantly.
 * Tilt angle, also effects classification significantly, as it makes certain details look less prominent. For example the roadworks sign, when titled to the right results in the human being more pronounced while the details to the right dissappear, making the sign look like a dangerous curve to the left sign. Number sign are particularly effected when photographed with large tilt angles
 * Contrast is normally a huge issue, but in our case we chose a pre-processing technique (adaptive histogram equalization) that reduces this effect
-* Background objects can also play a significant role, especially if they contain other traffic signs. 
+* Background objects can also play a significant role, especially if they contain other traffic signs.
 * Jiter also makes certain details look less prominent, particularly for signs that have a lot of detail i.e. childern crossing classified as road norrows to the left/right sign.
 
 Finally, we calculate the real world accuracy by counting correct predictions vs total number of images. In this case the real world accuracy is calculated to be 0.875% i.e. one out of 8 images is incorrectly classified. The html file for this notebook can be found in the root folder.
